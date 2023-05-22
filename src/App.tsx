@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
-
+import Countries from "./screens/Countries";
 
 function App() {
   return (
     <>
-        <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
-        </Routes>
+        <Route path="/countries/:code" element={<Countries />} />
+      </Routes>
     </>
   );
 }

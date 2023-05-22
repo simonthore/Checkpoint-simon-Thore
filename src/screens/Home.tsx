@@ -1,5 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const GET_CONTINENTS = gql`
@@ -19,20 +20,23 @@ export default function Home() {
   interface QueryData {
     continents: Continent[];
   }
-    const { loading, error, data } = useQuery<QueryData>(GET_CONTINENTS);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    
-    return (
-      <div className="App">
-        {data?.continents.map(({ code, name }) => (
-          <div key={code}>
+
+  const { loading, error, data } = useQuery<QueryData>(GET_CONTINENTS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <div className="App">
+      {data?.continents.map(({ code, name }) => (
+        <div key={code}>
+          <Link to={`/countries/${code}`}>
             <p>
               {code}: {name}
             </p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+}
